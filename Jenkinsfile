@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      yamlFile 'maven-pod.yaml'
+      yamlFile 'maven-pod.yml'
     }
   }  
   options { 
