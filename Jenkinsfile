@@ -17,10 +17,10 @@ pipeline {
                 checkout scm
                 withCredentials([string(credentialsId: 'Sonar_Login', variable: 'Sonar_Login'), string(credentialsId: 'Sonar_Login', variable: 'Sonar_URL'), string(credentialsId: 'Sonar_Login', variable: 'Sonar_Project')]) {
                   sh """
-                  mvn sonar:sonar   
-                  -Dsonar.projectKey=${Sonar_Project}   
-                  -Dsonar.host.url=${Sonar_URL}   
-                  -Dsonar.login=${Sonar_Login}
+                  mvn sonar:sonar \  
+                  -Dsonar.projectKey=${Sonar_Project} \  
+                  -Dsonar.host.url=${Sonar_URL} \
+                  -Dsonar.login=${Sonar_Login} 
                   """
                 }  
           }
