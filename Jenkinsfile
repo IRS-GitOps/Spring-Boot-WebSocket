@@ -13,10 +13,11 @@ pipeline {
   {
     stage('Maven Compile') {
       steps {
-        container ('maven')
+        container ('maven') {
           checkout scm
           sh 'mvn install'
           sh 'mvn compile'
+        }
       }
     }
     stage('Sonar Scans') {
