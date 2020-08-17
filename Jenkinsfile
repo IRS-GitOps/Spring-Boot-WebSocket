@@ -12,11 +12,13 @@ pipeline {
         label 'sonar'
       }
       steps {
-          withSonarQubeEnv('beedemo') {
               container('maven-jdk9') {
-                  sh 'mvn -Dsonar.scm.disabled=True -Dsonar.login=$SONAR -Dsonar.branch=$BRANCH_NAME sonar:sonar'
-                  clean verify -P sonar -Dsonar.login=$SONAR_LOGIN_TOKEN
-              }
+                withCredentials([string(credentialsId: 'Sonar_Login', variable: 'Sonar_Login'), string(credentialsId: 'Sonar_Login', variable: 'Sonar_URL'), string(credentialsId: 'Sonar_Login', variable: 'Sonar_Project')]) {
+                  sh '''mvn sonar:sonar   
+                  -Dsonar.projectKey=${Sonar_Project}   
+                  -Dsonar.host.url=${Sonar_URL}   
+                  -Dsonar.login=${Sonar_Login}'''
+                }  
           }
       }
     }  
