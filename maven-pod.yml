@@ -1,0 +1,12 @@
+kind: Pod
+metadata:
+  name: java-app
+spec:
+  containers:
+  - name: maven
+    image: maven:3-jdk-11
+    command:
+    - cat
+    tty: true
+  securityContext:
+    runAsUser: 1000
