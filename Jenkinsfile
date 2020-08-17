@@ -11,6 +11,13 @@ pipeline {
   }
   stages('Sonar Scan & Maven Compile/Deploy to Nexus')
   {
+    stage('Maven Compile') {
+      steps {
+        container ('maven')
+          sh 'mvn install'
+          sh 'mvn compile'
+      }
+    }
     stage('Sonar Scans') {
       steps {
               container('maven') {
@@ -23,13 +30,6 @@ pipeline {
           }
       }
     }  
-    stage('Maven Compile') {
-      steps {
-        container ('maven')
-          sh 'mvn install'
-          sh 'mvn compile'
-      }
-    }
     stage('Deploy to Nexus'){
       when {
         branch 'master'
