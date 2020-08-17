@@ -40,8 +40,8 @@ pipeline {
         container('maven')
           input(message: "Should we deploy?", ok: "Deploy", submitterParameter: "APPROVER")
           sh 'mvn clean deploy'
-        }
       }
-    }  
-  }
+    }
+  }  
 }
+
