@@ -9,7 +9,7 @@ pipeline {
     skipDefaultCheckout true
     preserveStashes(buildCount: 2)
   }
-  stages('Sonar Scan & Maven Compile/Deploy to Nexus)
+  stages('Sonar Scan & Maven Compile/Deploy to Nexus')
   {
     stage('Sonar Scans') {
       steps {
