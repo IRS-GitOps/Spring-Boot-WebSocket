@@ -23,10 +23,10 @@ pipeline {
     stage('Sonar Scans') {
       steps {
         container('maven') {
-                //withCredentials([string(credentialsId: 'Sonar_Login', variable: 'Sonar_Login'), string(credentialsId: 'Sonar_Login', variable: 'Sonar_URL'), string(credentialsId: 'Sonar_Login', variable: 'Sonar_Project')]) {
-                  //sh 'mvn sonar:sonar   -Dsonar.projectKey=${Sonar_Project}   -Dsonar.host.url=${Sonar_URL}.  -Dsonar.login=${Sonar_Login}'
-                  sh 'mvn sonar:sonar   -Dsonar.projectKey=IRS-GitOps   -Dsonar.host.url=https://sonarqube.cb-demos.io   -Dsonar.login=d1808d0a6091d51785fc8fe681150dbadf43fa0a'
-                //}  
+                withCredentials([string(credentialsId: 'Sonar_Login', variable: 'Sonar_Login'), string(credentialsId: 'Sonar_Login', variable: 'Sonar_URL'), string(credentialsId: 'Sonar_Login', variable: 'Sonar_Project')]) {
+                  sh 'mvn sonar:sonar   -Dsonar.projectKey=${Sonar_Project}   -Dsonar.host.url=${Sonar_URL}.  -Dsonar.login=${Sonar_Login}'
+                  //sh 'mvn sonar:sonar   -Dsonar.projectKey=IRS-GitOps   -Dsonar.host.url=https://sonarqube.cb-demos.io   -Dsonar.login=d1808d0a6091d51785fc8fe681150dbadf43fa0a'
+                }  
                 
           }
       }
