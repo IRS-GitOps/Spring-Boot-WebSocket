@@ -32,9 +32,9 @@ pipeline {
       }
     }  
     stage('Deploy to Nexus'){
-      when {
+      //when {
        // branch 'master'
-      }
+      //}
       steps {
         container('maven')
           input(message: "Should we deploy?", ok: "Deploy", submitterParameter: "APPROVER")
