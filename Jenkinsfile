@@ -33,12 +33,12 @@ pipeline {
     }  
     stage('Deploy to Nexus'){
       when {
-        branch 'master'
+       // branch 'master'
       }
       steps {
         container('maven')
           input(message: "Should we deploy?", ok: "Deploy", submitterParameter: "APPROVER")
-          sh 'mvn clean deploy'
+          sh 'curl -v -u tjohnson:Vitamonocu17 --upload-file /target/spring-boot-websocket-0.0.1-SNAPSHOT.jar https://nexus.cb-demos.io/repository/maven-snapshots//Users/tjohnson/tinker-apps/tinker/Spring-Boot-WebSocket/spring-boot-websocket-0.0.1-SNAPSHOT.jar'
       }
     }
   }  
