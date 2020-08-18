@@ -36,7 +36,7 @@ pipeline {
        // branch 'master'
       //}
       steps {
-        container('maven')
+        container('maven') {
           input(message: "Should we deploy?", ok: "Deploy", submitterParameter: "APPROVER")
        nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-starter-parent', classifier: '', file: 'spring-boot-websocket-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'ci-sa', groupId: 'org.springframework.boot', nexusUrl: 'nexus.cb-demos.io', nexusVersion: 'nexus3', protocol: 'https', repository: 'spring-boot-starter-parent', version: '0.0.1'
       }
