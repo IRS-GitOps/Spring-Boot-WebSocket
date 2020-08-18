@@ -38,7 +38,7 @@ pipeline {
       steps {
         container('maven')
           input(message: "Should we deploy?", ok: "Deploy", submitterParameter: "APPROVER")
-          sh 'curl -v -u tjohnson:Vitamonocu17 --upload-file /target/spring-boot-websocket-0.0.1-SNAPSHOT.jar https://nexus.cb-demos.io/repository/maven-snapshots//Users/tjohnson/tinker-apps/tinker/Spring-Boot-WebSocket/spring-boot-websocket-0.0.1-SNAPSHOT.jar'
+       nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-starter-parent', classifier: '', file: 'spring-boot-websocket-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'ci-sa', groupId: 'org.springframework.boot', nexusUrl: 'nexus.cb-demos.io', nexusVersion: 'nexus3', protocol: 'https', repository: 'spring-boot-starter-parent', version: '0.0.1'
       }
     }
   }  
