@@ -43,7 +43,7 @@ pipeline {
       }
     }
   }  
-  Post {
+  post {
        always {
            cloudBeesFlowCallRestApi body: '', configuration: 'Thunder-CD', envVarNameForResult: '', httpMethod: 'POST', parameters: [[key: 'projectName', value: 'tjohnson Demo'], [key: 'releaseName', value: 'tj-Spring-Boot-WebSocket']], urlPath: 'https://cd.cb-demos.io/rest/v1.0/releases'
        }
