@@ -45,7 +45,7 @@ pipeline {
   }  
   post {
        always {
-           cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', projectName:'tjohnson demo', releaseName: 'tj-Spring-Boot-WebSocket'
+         cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', projectName:'tjohnson demo', releaseName: 'tj-Spring-Boot-WebSocket', startingStage: ''
        }
   }
 }
