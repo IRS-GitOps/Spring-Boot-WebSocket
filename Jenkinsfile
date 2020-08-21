@@ -44,7 +44,7 @@ pipeline {
     }
      stage('Trigger Release Candidate') {
        steps {
-         cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', projectName: 'tjohnson Demo', releaseName: 'tj-Spring-Boot-WebSocket', startingStage: 'Release Readiness'
+         cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', parameters: '{"release":{"releaseName":"tj-Spring-Boot-WebSocket", "stages":[{"stageName":"Release Readiness","stageValue":true},{"stageName":"Pre-Prod","stageValue":true},{"stageName":"Prod","stageValue":true}], "pipelineName":"pipeline_tj-Spring-Boot-WebSocket","parameters":[]}}', projectName: 'tjohnson Demo', releaseName: 'tj-Spring-Boot-WebSocket', startingStage: 'Release Readiness'
        //parameters: '{"release":{"releaseName":"tj-Spring-Boot-WebSocket", "stages":[{"stageName":"Release Readiness","stageValue":true},{"stageName":"Pre-Prod","stageValue":true},{"stageName":"Prod","stageValue":true}], "pipelineName":"pipeline_tj-Spring-Boot-WebSocket","parameters":[{"parameterName":"ReleaseParam","parameterValue":"test"}]}}'
        }
      }
