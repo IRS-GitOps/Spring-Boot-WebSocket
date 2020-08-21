@@ -43,14 +43,9 @@ pipeline {
       }
     }
      stage('Trigger Release Candidate') {
-       agent any
-          steps {
-            script {
-              node{
-                cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', projectName: 'tjohnson Demo', releaseName: 'tj-Spring-Boot-WebSocket', startingStage: 'Release Readiness'
-              }
-            }
-           }
+       steps {
+            cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', projectName: 'tjohnson Demo', releaseName: 'tj-Spring-Boot-WebSocket', startingStage: 'Release Readiness'
+       }
      }
   }  
 }
