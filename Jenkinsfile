@@ -42,11 +42,11 @@ pipeline {
         }
       }
     }
-  }  
-  stage('Run Flow Release') {
+     stage('Run Flow Release') {
       steps {
        cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', projectName: 'tjohnson Demo', releaseName: 'tj-Spring-Boot-WebSocket', startingStage: ''
       }
-  }
+     }
+  }  
 }
 
