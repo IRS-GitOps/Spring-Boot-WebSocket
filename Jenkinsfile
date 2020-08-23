@@ -9,12 +9,13 @@ pipeline {
     skipDefaultCheckout true
     preserveStashes(buildCount: 2)
   }
-  stages('Sonar Scan & Maven Compile/Deploy to Nexus')
+  stages('First 6 Stages of CI/CD')
   {
     stage('Pull Source Code from SCM') {
-      steps{
+      steps {
         container ('maven') {
           checkout scm
+        }
       }
     }
     stage('Maven Build Compile/Unit Test') {
