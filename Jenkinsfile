@@ -11,7 +11,7 @@ pipeline {
   }
   stages('Sonar Scan & Maven Compile/Deploy to Nexus')
   {
-    stage('Pull Source Code from SCM')
+    stage('Pull Source Code from SCM') {
       steps{
         container ('maven') {
           checkout scm
@@ -64,7 +64,6 @@ pipeline {
      stage('Trigger Release Candidate') {
        steps {
          cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', parameters: '{"release":{"releaseName":"tj-Spring-Boot-WebSocket", "stages":[{"stageName":"Release Readiness","stageValue":true},{"stageName":"Pre-Prod","stageValue":true},{"stageName":"Prod","stageValue":true}], "pipelineName":"pipeline_tj-Spring-Boot-WebSocket","parameters":[]}}', projectName: 'tjohnson Demo', releaseName: 'tj-Spring-Boot-WebSocket', startingStage: 'Release Readiness'
-       //parameters: '{"release":{"releaseName":"tj-Spring-Boot-WebSocket", "stages":[{"stageName":"Release Readiness","stageValue":true},{"stageName":"Pre-Prod","stageValue":true},{"stageName":"Prod","stageValue":true}], "pipelineName":"pipeline_tj-Spring-Boot-WebSocket","parameters":[{"parameterName":"ReleaseParam","parameterValue":"test"}]}}'
        }
      }
   }  
