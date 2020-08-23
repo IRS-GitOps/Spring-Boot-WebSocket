@@ -16,7 +16,7 @@ pipeline {
         container ('maven') {
           checkout scm
       }
-      )
+    }
     stage('Maven Build Compile/Unit Test') {
       steps {
         container ('maven') {
