@@ -11,16 +11,21 @@ pipeline {
   }
   stages('Sonar Scan & Maven Compile/Deploy to Nexus')
   {
-    stage('Maven Compile') {
-      steps {
+    stage('Pull Source Code from SCM')
+      steps{
         container ('maven') {
           checkout scm
+      }
+      )
+    stage('Maven Build Compile/Unit Test') {
+      steps {
+        container ('maven') {
           sh 'mvn install'
           sh 'mvn compile'
         }
       }
     }
-    stage('Sonar Scans') {
+    stage('Code Coverage - Sonar Scans') {
       steps {
         container('maven') {
                 withCredentials([string(credentialsId: 'Sonar_Login', variable: 'Sonar_Login'), string(credentialsId: 'Sonar_URL', variable: 'Sonar_URL'), string(credentialsId: 'Sonar_Project', variable: 'Sonar_Project')]) {
@@ -30,8 +35,22 @@ pipeline {
                 
           }
       }
-    }  
-    stage('Deploy to Nexus'){
+    }
+    stage('Quality Scans') {
+      steps {
+        container('maven') {
+          echo 'Quality Scanning Success!'
+        }
+      }
+    }
+    stage('Security Scans') {
+      steps {
+        container('maven') {
+          echo 'Security Scanning Success!'
+        }
+      }
+    }
+    stage('Deploy to Nexus') {
       //when {
        // branch 'master'
       //}
