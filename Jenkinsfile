@@ -48,6 +48,25 @@ pipeline {
           echo 'Security Scanning Success!'
         }
       }
-    }   
+    }
+    stage('Deploy to Nexus') {
+      when {
+        branch 'master'
+      }
+      steps {
+        container('maven') {
+          input(message: "Deploy this artifact as a release candidate?", ok: "Approve", submitterParameter: "APPROVER")
+       nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-starter-parent', classifier: '', file: 'target/spring-boot-websocket-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'ci-sa', groupId: 'org.springframework.boot', nexusUrl: 'nexus.cb-demos.io', nexusVersion: 'nexus3', protocol: 'https', repository: 'maven-releases', version: '0.0.1'
+        }
+      }
+    }
+     stage('Trigger Release Candidate') {
+       when {
+        branch 'master'
+       }
+       steps {
+         cloudBeesFlowTriggerRelease configuration: 'Thunder-CD', parameters: '{"release":{"releaseName":"tj-Spring-Boot-WebSocket", "stages":[{"stageName":"Release Readiness","stageValue":true},{"stageName":"Pre-Prod","stageValue":true},{"stageName":"Prod","stageValue":true}], "pipelineName":"pipeline_tj-Spring-Boot-WebSocket","parameters":[]}}', projectName: 'tjohnson Demo', releaseName: 'tj-Spring-Boot-WebSocket', startingStage: 'Release Readiness'
+       }
+     }
   }  
 }
