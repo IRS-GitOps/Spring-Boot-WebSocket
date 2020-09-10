@@ -49,13 +49,6 @@ pipeline {
         }
       }
     }
-    stage('Maven Release') {
-      steps {
-        container ('maven') {
-          sh 'mvn -B release:prepare release:perform'
-        }
-      }
-    }
     stage('Deploy to Nexus') {
       when {
         branch 'master'
