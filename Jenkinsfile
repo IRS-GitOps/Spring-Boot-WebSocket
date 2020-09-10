@@ -51,7 +51,7 @@ pipeline {
     }
     stage('Deploy to Nexus') {
       when {
-        branch 'master'
+        branch 'development'
       }
       steps {
         container('maven') {
