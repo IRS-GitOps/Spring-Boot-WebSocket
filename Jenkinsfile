@@ -56,7 +56,7 @@ pipeline {
       steps {
         container('maven') {
           input(message: "Deploy this artifact as a release candidate?", ok: "Approve", submitterParameter: "APPROVER")
-       nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-starter-parent', classifier: '', file: 'target/spring-boot-websocket-1.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'ci-sa', groupId: 'org.springframework.boot', nexusUrl: 'nexus.cb-demos.io', nexusVersion: 'nexus3', protocol: 'https', repository: 'maven-releases', version: '0.0.1'
+       nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-starter-parent-noclash', classifier: '', file: 'target/spring-boot-websocket-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'ci-sa', groupId: 'org.springframework.boot', nexusUrl: 'nexus.cb-demos.io', nexusVersion: 'nexus3', protocol: 'https', repository: 'maven-releases', version: '0.0.1'
         }
       }
     }
