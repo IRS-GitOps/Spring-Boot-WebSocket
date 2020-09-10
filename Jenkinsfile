@@ -9,7 +9,7 @@ pipeline {
     skipDefaultCheckout true
     preserveStashes(buildCount: 2)
   }
-  stages('First 6 Stages of CI/CD')
+  stages('First Stages of CI/CD')
   {
     stage('Pull Source Code from SCM') {
       steps {
@@ -49,9 +49,16 @@ pipeline {
         }
       }
     }
+    stage('Maven Release') {
+      steps {
+        container ('maven') {
+          sh 'mvn -B release:prepare release:perform'
+        }
+      }
+    }
     stage('Deploy to Nexus') {
       when {
-        branch 'development'
+        branch 'master'
       }
       steps {
         container('maven') {
